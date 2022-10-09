@@ -1,5 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .wrapper {
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
+}
+
+.input-form {
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 5px 0;
+    border: none;
+    border-bottom: 3px solid black;
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: brown;
+    color: #fff;
+}
+
+.content-container {
+    /* background-color: aqua; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    width: 50%;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 2rem;
 }
