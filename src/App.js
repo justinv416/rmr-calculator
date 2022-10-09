@@ -8,6 +8,7 @@ function App() {
   const [inputHeight, setInputHeight] = useState("");
   const [inputAge, setInputAge] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showStart, setShowStart] = useState(true);
   const [maleRmr, setMaleRmr] = useState("");
   const [femaleRmr, setFemaleRmr] = useState("");
   const [showGender, setShowGender] = useState(false);
@@ -49,27 +50,33 @@ function App() {
     setShowForm(true);
   }
 
+  const handleShowStart = () => {
+    setShowGender(true);
+    setShowStart(false);
+  }
+
   return (
     <div className="App">
-      <h1>RMR Calculator</h1>
-      <h2>Trying to lose weight?</h2>
-      <button onClick={handleShowGender}>Get Started</button>
-      {showGender && <div className="">
-        <h3>Are you...</h3>
-        <button onClick={handleShowformMale}>Male</button>
-        <button onClick={handleShowformFemale}>Female</button>
-      </div>}
-      {showForm && <Form 
-        handleWeightInput={handleWeightInput} 
-        handleHeightInput={handleHeightInput} 
-        handleAgeInput={handleAgeInput} 
-        handleSubmit={handleSubmit} 
-      />}
-      <p>{inputWeight}</p>
-      <p>{inputHeight}</p>
-      <p>{inputAge}</p>
-      <p>Male RMR:{maleRmr}</p>
-      <p>Female RMR:{femaleRmr}</p>
+      <div className="wrapper">
+        <h1>RMR Calculator</h1>
+        <h2>Trying to lose weight?</h2>
+        {showStart && <button onClick={handleShowStart}>Get Started</button>}
+        {showGender && <div className="">
+          <h3>Are you...</h3>
+          <button onClick={handleShowformMale}>Male</button>
+          <button onClick={handleShowformFemale}>Female</button>
+        </div>}
+        {showForm && <Form 
+          handleWeightInput={handleWeightInput} 
+          handleHeightInput={handleHeightInput} 
+          handleAgeInput={handleAgeInput} 
+          handleSubmit={handleSubmit} 
+        />}
+        <p>{inputWeight}</p>
+        <p>{inputHeight}</p>
+        <p>{inputAge}</p>
+        {maleGender ? <p>RMR:{maleRmr}</p> : <p>RMR:{femaleRmr}</p>}
+      </div>
     </div>
   );
 }
