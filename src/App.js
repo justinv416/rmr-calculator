@@ -92,9 +92,11 @@ function App() {
           {showRmr && <p>Your resting metabolic rate is:</p>}
           {maleGender ? <p>{maleRmr}</p> : <p>{femaleRmr}</p>}
           {showRmr && <button className='button' onClick={handleFetchRecipes}>Get low cal recipes</button>}
-          {showRecipes && recipes.map((recipe) => {
+          <div className="card-container">
+            {showRecipes && recipes.map((recipe) => {
               return <Card recipe={recipe} />
-          })}
+            })}
+          </div>
         </div>
       </div>
     </div>
