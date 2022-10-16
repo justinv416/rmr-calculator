@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import axios from 'axios';
 import Card from './components/Card';
+import RecipeForm from './components/RecipeForm';
+import Navbar from './components/Navbar';
 
 function App() {
   const [inputWeight, setInputWeight] = useState("");
   const [inputHeight, setInputHeight] = useState("");
   const [inputAge, setInputAge] = useState("");
+  const [inputIngredient, setInputIngredient] = useState("");
+  const [inputCalories, setInputCalories] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showStart, setShowStart] = useState(true);
   const [maleRmr, setMaleRmr] = useState("");
@@ -19,7 +23,7 @@ function App() {
   const [showRmr, setShowRmr] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState()
-  const reqUrl = `https://api.edamam.com/api/recipes/v2?type=public&calories=300&app_id=3f541443&app_key=dec10585058602ee6f860f4779654260`
+  const reqUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${inputIngredient}&app_id=3f541443&app_key=dec10585058602ee6f860f4779654260&calories=${inputCalories}`
 
   const handleWeightInput = (e) => {
     setInputWeight(parseInt(e.target.value));
@@ -31,6 +35,14 @@ function App() {
 
   const handleAgeInput = (e) => {
     setInputAge(parseInt(e.target.value));
+  }
+
+  const handleIngredientInput = (e) => {
+    setInputIngredient((e.target.value));
+  }
+
+  const handleCaloriesInput = (e) => {
+    setInputCalories((e.target.value));
   }
 
   const handleSubmit = (e) => {
@@ -60,7 +72,8 @@ function App() {
     setShowStart(false);
   }
 
-  const handleFetchRecipes = () => {
+  const handleFetchRecipes = (e) => {
+    e.preventDefault();
     axios.get(reqUrl).then((res) => {
       setRecipes(res.data.hits);
       setShowRecipes(true)
@@ -71,6 +84,7 @@ function App() {
   return (
     <div className="App">
       <div className="wrapper">
+        <Navbar />
         <div className="content-container">
           <motion.h1 animate={{y: -10, opacity: 1}} initial={true}>Low-Cal</motion.h1>
           {showStart && <motion.h2 animate={{y: -10}}>Trying to lose weight?</motion.h2>}
@@ -91,7 +105,11 @@ function App() {
           />}
           {showRmr && <p>Your resting metabolic rate is:</p>}
           {maleGender ? <p>{maleRmr}</p> : <p>{femaleRmr}</p>}
-          {showRmr && <button className='button' onClick={handleFetchRecipes}>Get low cal recipes</button>}
+          {showRmr && <RecipeForm 
+            handleFetchRecipes={handleFetchRecipes}
+            handleIngredientInput={handleIngredientInput}
+            handleCaloriesInput={handleCaloriesInput}
+          />}
           <div className="card-container">
             {showRecipes && recipes.map((recipe) => {
               return <Card recipe={recipe} />

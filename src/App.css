@@ -56,6 +56,20 @@ h2 {
     font-size: 2rem;
 }
 
+li {
+    list-style-type: none;
+}
+
+nav {
+    background-color: aquamarine;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .gender-container button:first-of-type {
     margin: 10px 5px 0 0;
 }
@@ -64,10 +78,36 @@ h2 {
     margin-left: 10px 0 0 5px;
 }
 
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-info {
+    width: 50%;
+}
+
+.card-info:first-of-type {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-container {
-    background-color: bisque;
+    /* background-color: bisque; */
     justify-content: space-evenly;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+}
+
+.recipe-label {
+    font-weight: 700;
+}
+
+.recipe-image {
+    border-radius: 20px;
 }
